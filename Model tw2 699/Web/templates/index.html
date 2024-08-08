@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Prediksi Model</title>
+        <style>
+            .box {
+                width: 30px;
+                height: 30px;
+                border: 1px solid black;
+                display: inline-block;
+                margin: 5px;
+            }
+            .red { background-color: red; }
+        </style>
+    </head>
+    <body>
+
+        <h2>Masukkan Data untuk Prediksi</h2>
+
+        <form action="/predict" method="post" name="input_name">
+            <input type="text" name="input_name" placeholder="Fitur 0" required>
+            <button type="submit">Prediksi</button>
+        </form>
+
+        {% if prediction_text %}
+            <p>Hasil Prediksi: {{ prediction_text }}</p>
+            <div>
+                {% for i in range(1, 10) %}
+                    <div class="box" id="box{{ i }}"></div>
+                    {% if i % 3 == 0 %}
+                        <br>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var predictionText = "{{ prediction_text }}";
+                console.log("Prediction Text (Original):", predictionText); // Debug line
+        
+                // Extract the number from the string
+                var matches = predictionText.match(/\d+/);
+                if (matches) {
+                    var predictionValue = parseInt(matches[0], 10); // Convert the first number in the string to an integer
+                    console.log("Prediction Value (Parsed):", predictionValue); // Debug line
+        
+                    if (!isNaN(predictionValue)) {
+                        var boxIndex = 'box' + predictionValue;
+                        var box = document.getElementById(boxIndex);
+                        if (box) {
+                            box.classList.add('red');
+                        }
+                    }
+                }
+            });
+        </script>       
+        
+
+    </body>
+</html>

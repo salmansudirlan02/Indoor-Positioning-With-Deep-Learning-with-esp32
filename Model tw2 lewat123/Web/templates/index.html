@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Prediksi Model</title>
+</head>
+<body>
+
+<h2>Masukkan Data untuk Prediksi</h2>
+
+<form action="/predict" method="post" name="input_name">
+    <!-- Input fields untuk fitur -->
+    <!-- Tambahkan input field sesuai kebutuhan Anda -->
+    <input type="text" name="input_name" placeholder="Fitur 0" required>
+    <!-- Tambahkan input untuk fitur lainnya -->
+    <button type="submit">Prediksi</button>
+</form>
+
+{% if prediction_text %}
+    <p>Hasil Prediksi: {{ prediction_text }}</p>
+{% endif %}
+
+</body>
+</html>
